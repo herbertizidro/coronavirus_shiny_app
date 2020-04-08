@@ -1,7 +1,8 @@
 ui <- dashboardPage(
     dashboardHeader(title = 'BRASIL COVID-19'),
     
-    dashboardSidebar(disable = TRUE),              
+    dashboardSidebar(disable = TRUE, 
+                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; }')))),              
     dashboardBody(
         
         fluidRow(
@@ -14,8 +15,8 @@ ui <- dashboardPage(
         
         fluidRow(
             
-            box(title = "Brasil - óbitos por UF", width = 8, withLoader(leafletOutput("mapa_br"), type = "html", loader = "loader6"),
-                paste("Fonte: Ministério da Saúde e secretarias de saúde de cada estado"),
+            box(title = "Brasil - óbitos por uf", width = 8, withLoader(leafletOutput("mapa_br"), type = "html", loader = "loader6"),
+                paste("Fonte: Ministério da Saúde e secretarias de saúde de cada estado -"),
                 downloadLink("dados_corona", "Download CSV")),
             box(title = "Casos confirmados por região", width = 4, withLoader(plotlyOutput("casos_regiao"), type = "html", loader = "loader6"))
             
