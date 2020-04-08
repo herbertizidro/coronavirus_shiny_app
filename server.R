@@ -1,10 +1,11 @@
 
+
 shinyServer(function(input, output, session) {
     
     output$confirmados <- renderInfoBox({
         valueBox(
             total_confirmados, "Total de casos confirmados", icon = icon("chart-line"),
-            color = "blue"
+            color = "aqua"
         )
     })
     
