@@ -1,0 +1,164 @@
+[
+        {
+          "-id": 12,
+          "-title": "Acre",
+          "-lat": -8.77,
+          "-long": -70.55
+        },
+        {
+          "-id": 27,
+          "-title": "Alagoas",
+          "-lat": -9.62,
+          "-long": -36.82
+        },
+        {
+          "-id": 13,
+          "-title": "Amazonas",
+          "-lat": -3.47,
+          "-long": -65.10
+        },
+        {
+          "-id": 16,
+          "-title": "Amapá",
+          "-lat": 1.41,
+          "-long": -51.77
+        },
+        {
+          "-id": 29,
+          "-title": "Bahia",
+          "-lat": -13.29,
+          "-long": -41.71
+        },
+        {
+          "-id": 23,
+          "-title": "Ceará",
+          "-lat": -5.20,
+          "-long": -39.53
+        },
+        {
+          "-id": 53,
+          "-title": "Distrito Federal",
+          "-lat": -15.83,
+          "-long": -47.86
+        },
+        {
+          "-id": 32,
+          "-title": "Espírito Santo",
+          "-lat": -19.19,
+          "-long": -40.34
+        },
+        {
+          "-id": 52,
+          "-title": "Goiás",
+          "-lat": -15.98,
+          "-long": -49.86
+        },
+        {
+          "-id": 21,
+          "-title": "Maranhão",
+          "-lat": -5.42,
+          "-long": -45.44
+        },
+        {
+          "-id": 31,
+          "-title": "Minas Gerais",
+          "-lat": -18.10,
+          "-long": -44.38
+        },
+        {
+          "-id": 50,
+          "-title": "Mato Grosso do Sul",
+          "-lat": -20.51,
+          "-long": -54.54
+        },
+        {
+          "-id": 51,
+          "-title": "Mato Grosso",
+          "-lat": -12.64,
+          "-long": -55.42
+        },
+        {
+          "-id": 15,
+          "-title": "Pará",
+          "-lat":  -3.79,
+          "-long": -52.48
+        },
+        {
+          "-id": 25,
+          "-title": "Paraíba",
+          "-lat": -7.28,
+          "-long":  -36.72
+        },
+        {
+          "-id": 26,
+          "-title": "Pernambuco",
+          "-lat": -8.38,
+          "-long": -37.86
+        },
+        {
+          "-id": 22,
+          "-title": "Piauí",
+          "-lat": -6.60,
+          "-long": -42.28
+        },
+        {
+          "-id": 41,
+          "-title": "Paraná",
+          "-lat": -24.89,
+          "-long": -51.55
+        },
+        {
+          "-id": 33,
+          "-title": "Rio de Janeiro",
+          "-lat": -22.25, 
+          "-long": -42.66
+        },
+        {
+          "-id": 24,
+          "-title": "Rio Grande do Norte",
+          "-lat": -5.81, 
+          "-long":  -36.59
+        },
+        {
+          "-id": 11,
+          "-title": "Rondônia",
+          "-lat": -10.83,
+          "-long": -63.34
+        },
+        {
+          "-id": 14,
+          "-title": "Roraima",
+          "-lat": 1.99, 
+          "-long": -61.33
+        },
+        {
+          "-id": 43,
+          "-title": "Rio Grande do Sul",
+          "-lat": -30.17,
+          "-long": -53.50
+        },
+        {
+          "-id": 42,
+          "-title": "Santa Catarina",
+          "-lat": -27.45,
+          "-long": -50.95
+        },
+        {
+          "-id": 28,
+          "-title": "Sergipe",
+          "-lat": -10.57,
+          "-long": -37.45
+        },
+        {
+          "-id": 35,
+          "-title": "São Paulo",
+          "-lat": -22.19,
+          "-long": -48.79
+        },
+        {
+          "-id": 17,
+          "-title": "Tocantins",
+          "-lat": -9.46,
+          "-long": -48.26
+        }
+      ]
