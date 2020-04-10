@@ -4,7 +4,7 @@
 
  https://herbertsouza.shinyapps.io/coronavirusBR/
 
-<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid19.png">
+<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid19 10.04.png">
 
 
 
