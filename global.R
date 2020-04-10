@@ -1,6 +1,7 @@
 
 library(DT)
 library(curl)
+library(Rcpp)
 library(xlsx)
 library(dplyr)
 library(rvest)
@@ -15,6 +16,7 @@ library(devtools)
 library(lubridate)
 library(fuzzyjoin)
 library(shinythemes)
+library(formattable)
 library(RColorBrewer)
 library(shinydashboard)
 library(leaflet.extras)
@@ -47,7 +49,11 @@ names(corona_brazil)[4] = "mortes"
 total_confirmados = sum(corona_brazil$casos)
 total_obitos = sum(corona_brazil$mortes)
 taxa_letalidade = (total_obitos * 100) / total_confirmados
+
+total_confirmados = accounting(total_confirmados, format="d")
+total_obitos = accounting(total_obitos, format="d")
 taxa_letalidade = paste0(format(taxa_letalidade, digits=2, decimal.mark=","), "%")
+
 corona_brazil = left_join(corona_brazil, lat_long_UFs, by="uid")
 
 shp = readOGR("www", "BRUFE250GC_SIR", stringsAsFactors=FALSE, encoding="UTF-8") # shp disponibilizado pelo IBGE
