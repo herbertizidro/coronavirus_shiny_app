@@ -1,5 +1,4 @@
 
-
 shinyServer(function(input, output, session) {
     
     output$confirmados <- renderInfoBox({
@@ -93,8 +92,8 @@ shinyServer(function(input, output, session) {
                 textinfo = 'label+percent+value',
                 insidetextfont = list(color = '#FFFFFF'),
                 hoverinfo = 'text',
-                showlegend = FALSE) %>%
-            layout(title = '',
+                showlegend = TRUE) %>%
+            layout(title = '', legend = list(orientation = 'h'),
                    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
                    yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
     })
