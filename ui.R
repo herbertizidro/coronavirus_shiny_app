@@ -3,7 +3,7 @@ ui <- dashboardPage(
     dashboardHeader(title = "Brasil Covid-19"),
     
     dashboardSidebar(disable = TRUE, 
-                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;} .testes-milhao{text-align: center;}')))),              
+                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;}')))),              
     dashboardBody(
         
         fluidRow(
