@@ -1,21 +1,21 @@
 
 shinyServer(function(input, output, session) {
     
-    output$confirmados <- renderInfoBox({
+    output$confirmados <- renderValueBox({
         valueBox(
             total_confirmados, "Total de casos confirmados", icon = icon("chart-line"),
             color = "aqua"
         )
     })
     
-    output$obitos <- renderInfoBox({
+    output$obitos <- renderValueBox({
         valueBox(
             total_obitos, "Total de óbitos", icon = icon("chart-line"),
             color = "red"
         )
     })
     
-    output$letalidade <- renderInfoBox({
+    output$letalidade <- renderValueBox({
         valueBox(
             taxa_letalidade, "Letalidade", icon = icon("percent"),
             color = "yellow"
