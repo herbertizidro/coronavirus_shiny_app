@@ -6,7 +6,7 @@
  
  Fontes: https://labs.wesleycota.com/sarscov2/br/, https://github.com/gabrielcesar/covid-br 
 
-<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid19 24.04.png">
+<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid19 24.04.20.png">
 
 
 
