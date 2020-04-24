@@ -1,4 +1,3 @@
-
 library(DT)
 library(curl)
 library(Rcpp)
@@ -73,6 +72,18 @@ names(evolucao_json)[5] = "mortes(acumulado)"
 names(evolucao_json)[2] = "confirmados(dia)"
 names(evolucao_json)[4] = "mortes(dia)"
 
+#total de testes/testes por milhão pra covid19 feitos no Brasil
+worldometers = read_html("https://www.worldometers.info/coronavirus/")
+tabela = worldometers %>% html_nodes("tr") %>% html_text()
+testes_por_milhao = "---"
+testes_total = "---"
+for (i in tabela) {
+  if(grepl("Brazil", i)){
+    tabela = c(str_split(i, "\\n")[[1]][11], str_split(i, "\\n")[[1]][12])
+    testes_total = tabela[1]
+    testes_por_milhao = tabela[2]
+  }
+}
 
 # notícias sobre o corona - BBC
 noticias_bbc = read_html("https://www.bbc.com/portuguese/search?q=coronav%C3%ADrus")
