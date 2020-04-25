@@ -56,7 +56,7 @@ taxa_letalidade = paste0(format(taxa_letalidade, digits=2, decimal.mark=","), "%
 corona_brazil = left_join(corona_brazil, lat_long_UFs, by="uid")
 
 shp = readOGR("www", "BRUFE250GC_SIR", stringsAsFactors=FALSE, encoding="UTF-8") # shp disponibilizado pelo IBGE
-mapa_corona = merge(shp, corona_brazil, by.x = "CD_GEOCUF", by.y = "uid") # merge dos dados da API com o shp
+mapa_corona = merge(shp, corona_brazil, by.x = "CD_GEOCUF", by.y = "uid") # merge dos dados do github com o shp
 
 df_aux = as.data.frame(cbind(mapa_corona$NM_REGIAO, mapa_corona$casos))
 names(df_aux)[1] = "Região"
