@@ -5,7 +5,7 @@
  Acesse em: https://herbertsouza.shinyapps.io/coronavirusBR/
  
 
-<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid19 02.05.20.png">
+<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/Brasil Covid-19.png">
 
 
 Fontes:
