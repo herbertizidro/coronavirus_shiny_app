@@ -11,5 +11,5 @@
 Fontes:
 
  - https://labs.wesleycota.com/sarscov2/br/
- - https://github.com/gabrielcesar/covid-br
+ - https://github.com/gabrielcesar/covid-br (desatualizado)
  - https://www.worldometers.info/coronavirus/
