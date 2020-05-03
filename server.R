@@ -60,11 +60,22 @@ shinyServer(function(input, output, session) {
     
     
     output$acumulado = renderPlotly({
-        g1 = ggplot(evolucao_json) +
-            geom_line(aes(x = data, y = `mortes(acumulado)`), color='red') +
-            geom_point(aes(x = data, y = `mortes(acumulado)`), color='red', size = 1) +
-            geom_line(aes(x = data, y = `confirmados(acumulado)`), color='blue') + 
-            geom_point(aes(x = data, y = `confirmados(acumulado)`), color='blue', size = 1) + 
+        # g1 = ggplot(evolucao_json) +
+        #     geom_line(aes(x = data, y = `mortes(acumulado)`), color='red') +
+        #     geom_point(aes(x = data, y = `mortes(acumulado)`), color='red', size = 1) +
+        #     geom_line(aes(x = data, y = `confirmados(acumulado)`), color='blue') +
+        #     geom_point(aes(x = data, y = `confirmados(acumulado)`), color='blue', size = 1) +
+        #     labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
+        #     scale_x_date(date_labels = '%d/%m', breaks = "months") +
+        #     ggtitle("") +
+        #     theme_minimal()
+        # ggplotly(g1)
+        
+        g1 = ggplot(covid_total_dia) +
+            geom_line(aes(x = data, y = mortes), color='red') +
+            geom_point(aes(x = data, y = mortes), color='red', size = 1) +
+            geom_line(aes(x = data, y = casos), color='blue') +
+            geom_point(aes(x = data, y = casos), color='blue', size = 1) +
             labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
             ggtitle("") +
@@ -89,9 +100,9 @@ shinyServer(function(input, output, session) {
     output$casos_regiao = renderPlotly({
         plot_ly(df_aux, labels = ~`Região`, values = ~`Total de casos confirmados`, type = 'pie',
                 textposition = 'inside',
-                textinfo = 'label+percent+value',
+                #textinfo = 'label', #label+percent+value
                 insidetextfont = list(color = '#FFFFFF'),
-                hoverinfo = 'text',
+                #hoverinfo = 'text',
                 showlegend = TRUE) %>%
             layout(title = '', legend = list(orientation = 'h'),
                    xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
