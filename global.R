@@ -56,13 +56,29 @@ taxa_letalidade = paste0(format(taxa_letalidade, digits=2, decimal.mark=","), "%
 corona_brazil = left_join(corona_brazil, lat_long_UFs, by="uid")
 
 shp = readOGR("www", "BRUFE250GC_SIR", stringsAsFactors=FALSE, encoding="UTF-8") # shp disponibilizado pelo IBGE
-mapa_corona = merge(shp, corona_brazil, by.x = "CD_GEOCUF", by.y = "uid") # merge dos dados do github com o shp
+mapa_corona = merge(shp, corona_brazil, by.x = "CD_GEOCUF", by.y = "uid") # merge dos dados da API com o shp
 
 df_aux = as.data.frame(cbind(mapa_corona$NM_REGIAO, mapa_corona$casos))
 names(df_aux)[1] = "Região"
 names(df_aux)[2] = "Total de casos confirmados"
 
-#avanço dos casos(acumulado e dia)
+#avanço dos casos(acumulado)
+covid_total_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
+covid_total_dia = subset(covid_total_dia, state != "TOTAL") #linha desnecessária
+covid_total_dia = covid_total_dia[, c(1,6,8)]
+covid_total_dia[,1] = as.Date(covid_total_dia[,1])
+
+names(covid_total_dia)[1] = "data"
+names(covid_total_dia)[2] = "mortes"
+names(covid_total_dia)[3] = "casos"
+
+mortes_aux = covid_total_dia %>% group_by(data) %>% summarise(mortes = sum(mortes))
+casos_aux = covid_total_dia %>% group_by(data) %>% summarise(casos = sum(casos))
+casos_aux = casos_aux[,2]
+covid_total_dia = cbind(mortes_aux, casos_aux)
+
+
+#avanço dos casos(dia) - ATÉ 03/05 AINDA ESTAVA DESATUALIZADO ...
 evolucao_json = fromJSON("https://raw.githubusercontent.com/gabrielcesar/covid-br/master/data/evolution.json")
 evolucao_json = filter(evolucao_json, month(date) > 2)
 evolucao_json$date = dmy(evolucao_json$date)
@@ -72,7 +88,7 @@ names(evolucao_json)[5] = "mortes(acumulado)"
 names(evolucao_json)[2] = "confirmados(dia)"
 names(evolucao_json)[4] = "mortes(dia)"
 
-#total de testes/testes por milhão pra covid19 feitos no Brasil
+#total de testes pra covid19 feitos no Brasil
 worldometers = read_html("https://www.worldometers.info/coronavirus/")
 tabela = worldometers %>% html_nodes("tr") %>% html_text()
 testes_por_milhao = "---"
@@ -119,3 +135,7 @@ UOL = paste(uol_principais_titulo, "  |  ", uol_principais_hora,
 NOTICIAS = c()
 NOTICIAS = as.data.frame(c(NOTICIAS, BBC, OGLOBO, UOL))
 names(NOTICIAS)[1] = "<span class='fontes-noticias'>Fontes: BBC Brasil, O Globo e UOL</div>"
+
+#limpar memória
+rm(list = subset(ls(), !(ls() %in% c("corona_brazil", "covid_total_dia", "df_aux", "evolucao_json", "mapa_corona",
+                                     "NOTICIAS", "taxa_letalidade", "testes_por_milhao", "testes_total", "total_confirmados", "total_obitos"))))
