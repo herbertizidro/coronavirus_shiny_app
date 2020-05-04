@@ -85,11 +85,11 @@ shinyServer(function(input, output, session) {
     
     
     output$total_dia = renderPlotly({
-        g2 = ggplot(evolucao_json) +
-            geom_line(aes(x = data, y = `mortes(dia)`), color='red') +
-            geom_point(aes(x = data, y = `mortes(dia)`), color='red', size = 1) +
-            geom_line(aes(x = data, y = `confirmados(dia)`), color='blue') + 
-            geom_point(aes(x = data, y = `confirmados(dia)`), color='blue', size = 1) + 
+        g2 = ggplot(covid_novos_dia) +
+            geom_line(aes(x = data, y = `novas mortes`), color='red') +
+            geom_point(aes(x = data, y = `novas mortes`), color='red', size = 1) +
+            geom_line(aes(x = data, y = `novos casos`), color='blue') + 
+            geom_point(aes(x = data, y = `novos casos`), color='blue', size = 1) + 
             labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
             ggtitle("") +
