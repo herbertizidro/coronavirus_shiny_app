@@ -78,15 +78,21 @@ casos_aux = casos_aux[,2]
 covid_total_dia = cbind(mortes_aux, casos_aux)
 
 
-#avanço dos casos(dia) - ATÉ 03/05 AINDA ESTAVA DESATUALIZADO ...
-evolucao_json = fromJSON("https://raw.githubusercontent.com/gabrielcesar/covid-br/master/data/evolution.json")
-evolucao_json = filter(evolucao_json, month(date) > 2)
-evolucao_json$date = dmy(evolucao_json$date)
-names(evolucao_json)[1] = "data"
-names(evolucao_json)[3] = "confirmados(acumulado)"
-names(evolucao_json)[5] = "mortes(acumulado)"
-names(evolucao_json)[2] = "confirmados(dia)"
-names(evolucao_json)[4] = "mortes(dia)"
+#avanço dos novos casos(por dia de notificação)
+covid_novos_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
+covid_novos_dia = subset(covid_novos_dia, state != "TOTAL") #linha desnecessária
+covid_novos_dia = covid_novos_dia[, c(1,5,7)]
+covid_novos_dia[,1] = as.Date(covid_novos_dia[,1])
+
+names(covid_novos_dia)[1] = "data"
+names(covid_novos_dia)[2] = "novas mortes"
+names(covid_novos_dia)[3] = "novos casos"
+
+nvs_mortes_aux = covid_novos_dia %>% group_by(data) %>% summarise(`novas mortes` = sum(`novas mortes`))
+nvs_casos_aux = covid_novos_dia %>% group_by(data) %>% summarise(`novos casos` = sum(`novos casos`))
+nvs_casos_aux = nvs_casos_aux[,2]
+covid_novos_dia = cbind(nvs_mortes_aux, nvs_casos_aux)
+
 
 #total de testes pra covid19 feitos no Brasil
 worldometers = read_html("https://www.worldometers.info/coronavirus/")
@@ -137,5 +143,5 @@ NOTICIAS = as.data.frame(c(NOTICIAS, BBC, OGLOBO, UOL))
 names(NOTICIAS)[1] = "<span class='fontes-noticias'>Fontes: BBC Brasil, O Globo e UOL</div>"
 
 #limpar memória
-rm(list = subset(ls(), !(ls() %in% c("corona_brazil", "covid_total_dia", "df_aux", "evolucao_json", "mapa_corona",
+rm(list = subset(ls(), !(ls() %in% c("corona_brazil", "covid_total_dia", "covid_novos_dia", "df_aux", "evolucao_json", "mapa_corona",
                                      "NOTICIAS", "taxa_letalidade", "testes_por_milhao", "testes_total", "total_confirmados", "total_obitos"))))
