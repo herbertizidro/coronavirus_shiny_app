@@ -1,9 +1,10 @@
 
+
 ui <- dashboardPage(
     dashboardHeader(title = "Brasil Covid-19"),
     
     dashboardSidebar(disable = TRUE, 
-                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;}')))),              
+                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;} .testes-milhao{text-align: center;}')))),              
     dashboardBody(
         
         fluidRow(
@@ -36,7 +37,7 @@ ui <- dashboardPage(
             box(title = "Acumulado", width = 6, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
                 tags$li("Casos confirmados", style = "color: blue; font-size: 12px; margin-left: 15px;"),
                 tags$li("Mortes", style = "color: red; font-size: 12px; margin-left: 15px;")),
-            box(title = "Por dia", width = 6, withLoader(plotlyOutput("total_dia"), type = "html", loader = "loader6"),
+            box(title = "Novos casos por data de confirmação", width = 6, withLoader(plotlyOutput("total_dia"), type = "html", loader = "loader6"),
                 tags$li("Casos confirmados por dia", style = "color: blue; font-size: 12px; margin-left: 15px;"),
                 tags$li("Mortes por dia", style = "color: red; font-size: 12px; margin-left: 15px;"))
 
