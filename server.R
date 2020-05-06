@@ -59,18 +59,7 @@ shinyServer(function(input, output, session) {
     )
     
     
-    output$acumulado = renderPlotly({
-        # g1 = ggplot(evolucao_json) +
-        #     geom_line(aes(x = data, y = `mortes(acumulado)`), color='red') +
-        #     geom_point(aes(x = data, y = `mortes(acumulado)`), color='red', size = 1) +
-        #     geom_line(aes(x = data, y = `confirmados(acumulado)`), color='blue') +
-        #     geom_point(aes(x = data, y = `confirmados(acumulado)`), color='blue', size = 1) +
-        #     labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
-        #     scale_x_date(date_labels = '%d/%m', breaks = "months") +
-        #     ggtitle("") +
-        #     theme_minimal()
-        # ggplotly(g1)
-        
+    output$acumulado = renderPlotly({        
         g1 = ggplot(covid_total_dia) +
             geom_line(aes(x = data, y = mortes), color='red') +
             geom_point(aes(x = data, y = mortes), color='red', size = 1) +
