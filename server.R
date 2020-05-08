@@ -1,3 +1,4 @@
+options(scipen=999) #evitar notação científica
 
 shinyServer(function(input, output, session) {
     
