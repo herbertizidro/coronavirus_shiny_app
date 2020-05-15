@@ -34,13 +34,15 @@ ui <- dashboardPage(
 
         fluidRow(
 
-            box(title = "Acumulado", width = 6, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
+            box(title = "Acumulado", width = 12, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
                 tags$li("Casos confirmados", style = "color: blue; font-size: 12px; margin-left: 15px;"),
-                tags$li("Mortes", style = "color: red; font-size: 12px; margin-left: 15px;")),
-            box(title = "Novos casos por data de confirmação", width = 6, withLoader(plotlyOutput("total_dia"), type = "html", loader = "loader6"),
-                tags$li("Casos confirmados por dia", style = "color: blue; font-size: 12px; margin-left: 15px;"),
-                tags$li("Mortes por dia", style = "color: red; font-size: 12px; margin-left: 15px;"))
+                tags$li("Mortes", style = "color: red; font-size: 12px; margin-left: 15px;"))
 
+        ),
+        
+        fluidRow(
+            box(title = "Casos novos por data de notificação", width = 6, withLoader(plotlyOutput("casos_novos_dia"), type = "html", loader = "loader6")),
+            box(title = "Óbitos por data de notificação", width = 6, withLoader(plotlyOutput("obitos_dia"), type = "html", loader = "loader6"))
         ),
 
         fluidRow(
