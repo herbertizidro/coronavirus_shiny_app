@@ -78,7 +78,7 @@ casos_aux = casos_aux[,2]
 covid_total_dia = cbind(mortes_aux, casos_aux)
 
 
-#avanço dos novos casos(por dia de notificação)
+#avanço dos novo casos(por dia de notificação)
 covid_novos_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
 covid_novos_dia = subset(covid_novos_dia, state != "TOTAL") #linha desnecessária
 covid_novos_dia = covid_novos_dia[, c(1,5,7)]
@@ -101,7 +101,7 @@ testes_por_milhao = "---"
 testes_total = "---"
 for (i in tabela) {
   if(grepl("Brazil", i)){
-    tabela = c(str_split(i, "\\n")[[1]][11], str_split(i, "\\n")[[1]][12])
+    tabela = c(str_split(i, "\\n")[[1]][12], str_split(i, "\\n")[[1]][13])
     testes_total = tabela[1]
     testes_por_milhao = tabela[2]
   }
