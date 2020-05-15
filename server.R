@@ -1,4 +1,5 @@
-options(scipen=999) #evitar notação científica
+
+options(scipen=999)
 
 shinyServer(function(input, output, session) {
     
@@ -60,7 +61,7 @@ shinyServer(function(input, output, session) {
     )
     
     
-    output$acumulado = renderPlotly({        
+    output$acumulado = renderPlotly({
         g1 = ggplot(covid_total_dia) +
             geom_line(aes(x = data, y = mortes), color='red') +
             geom_point(aes(x = data, y = mortes), color='red', size = 1) +
@@ -74,17 +75,25 @@ shinyServer(function(input, output, session) {
     })
     
     
-    output$total_dia = renderPlotly({
-        g2 = ggplot(covid_novos_dia) +
-            geom_line(aes(x = data, y = `novas mortes`), color='red') +
-            geom_point(aes(x = data, y = `novas mortes`), color='red', size = 1) +
-            geom_line(aes(x = data, y = `novos casos`), color='blue') + 
-            geom_point(aes(x = data, y = `novos casos`), color='blue', size = 1) + 
-            labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
+    output$obitos_dia = renderPlotly({
+        g2 = ggplot(covid_novos_dia, aes(x=data, y=`novas mortes`)) +
+            geom_bar(stat="identity", fill = "red") +
+            labs(x = "Dias do mês", y = "Óbitos novos") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
             ggtitle("") +
             theme_minimal()
         ggplotly(g2)
+    })
+    
+    
+    output$casos_novos_dia = renderPlotly({
+        g3 = ggplot(covid_novos_dia, aes(x=data, y=`novos casos`)) +
+            geom_bar(stat="identity", fill = "blue") +
+            labs(x = "Dias do mês", y = "Casos novos") +
+            scale_x_date(date_labels = '%d/%m', breaks = "months") +
+            ggtitle("") +
+            theme_minimal()
+        ggplotly(g3)
     })
     
     output$casos_regiao = renderPlotly({
