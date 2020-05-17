@@ -33,6 +33,8 @@ shinyServer(function(input, output, session) {
                          mapa_corona$estado, 
                          "<br><strong>Confirmados: </strong>", 
                          mapa_corona$casos,
+                         "<br><strong>Recuperados: </strong>", 
+                         mapa_corona$recuperados,
                          "<br><strong>Mortes: </strong>",
                          mapa_corona$mortes)
         
@@ -65,9 +67,14 @@ shinyServer(function(input, output, session) {
         g1 = ggplot(covid_total_dia) +
             geom_line(aes(x = data, y = mortes), color='red') +
             geom_point(aes(x = data, y = mortes), color='red', size = 1) +
+            
             geom_line(aes(x = data, y = casos), color='blue') +
             geom_point(aes(x = data, y = casos), color='blue', size = 1) +
-            labs(x = "Dias do mês", y = "Casos confirmados e mortes") +
+            
+            geom_line(aes(x = data, y = recuperados), color='green') +
+            geom_point(aes(x = data, y = recuperados), color='green', size = 1) +
+            
+            labs(x = "Dias do mês", y = "Confirmados, óbitos e recuperados") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
             ggtitle("") +
             theme_minimal()
