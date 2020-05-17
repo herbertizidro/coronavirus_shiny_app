@@ -36,8 +36,9 @@ estados_uid = read.xlsx("estados_uid_template.xlsx", 1, encoding="UTF-8")
 
 #fonte de dados covid19
 covid_csv = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-total.csv")
-covid_csv = covid_csv[, c(2,3,6)]
-covid_csv = covid_csv[-1,]
+covid_csv = covid_csv[, c(2,3,6,12)]
+#covid_csv = covid_csv[-1,]
+covid_csv = subset(covid_csv, state != "TOTAL") #linha desnecessária
 covid_csv$state = as.character(covid_csv$state)
 corona_brazil = estados_uid %>% regex_inner_join(covid_csv, by = c(state = "state"))
 corona_brazil$state.x = as.character(corona_brazil$state.x)
@@ -45,6 +46,9 @@ corona_brazil$state.y = NULL
 names(corona_brazil)[2] = "estado"
 names(corona_brazil)[3] = "casos"
 names(corona_brazil)[4] = "mortes"
+names(corona_brazil)[5] = "recuperados"
+
+corona_brazil[is.na(corona_brazil)] = 0
 total_confirmados = sum(corona_brazil$casos)
 total_obitos = sum(corona_brazil$mortes)
 taxa_letalidade = (total_obitos * 100) / total_confirmados
@@ -65,20 +69,24 @@ names(df_aux)[2] = "Total de casos confirmados"
 #avanço dos casos(acumulado)
 covid_total_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
 covid_total_dia = subset(covid_total_dia, state != "TOTAL") #linha desnecessária
-covid_total_dia = covid_total_dia[, c(1,6,8)]
+covid_total_dia = covid_total_dia[, c(1,6,8,14)]
 covid_total_dia[,1] = as.Date(covid_total_dia[,1])
 
 names(covid_total_dia)[1] = "data"
 names(covid_total_dia)[2] = "mortes"
 names(covid_total_dia)[3] = "casos"
+names(covid_total_dia)[4] = "recuperados"
+covid_total_dia[is.na(covid_total_dia)] = 0
 
 mortes_aux = covid_total_dia %>% group_by(data) %>% summarise(mortes = sum(mortes))
 casos_aux = covid_total_dia %>% group_by(data) %>% summarise(casos = sum(casos))
 casos_aux = casos_aux[,2]
-covid_total_dia = cbind(mortes_aux, casos_aux)
+recuperados_aux = covid_total_dia %>% group_by(data) %>% summarise(recuperados = sum(recuperados))
+recuperados_aux = recuperados_aux[,2]
+covid_total_dia = cbind(mortes_aux, casos_aux, recuperados_aux)
 
 
-#avanço dos novo casos(por dia de notificação)
+#avanço dos novos casos(por dia de notificação)
 covid_novos_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
 covid_novos_dia = subset(covid_novos_dia, state != "TOTAL") #linha desnecessária
 covid_novos_dia = covid_novos_dia[, c(1,5,7)]
