@@ -4,7 +4,7 @@ ui <- dashboardPage(
     dashboardHeader(title = "Brasil Covid-19"),
     
     dashboardSidebar(disable = TRUE, 
-                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;} .testes-milhao{text-align: center;}')))),              
+                     tags$head(tags$style(HTML('#mapa_br { height: 500px !important; } *{font-family: "Quicksand", sans-serif;} .table{width: 100%;} .testes-milhao, #covid-testes-br{text-align: center;}')))),              
     dashboardBody(
         
         fluidRow(
@@ -25,7 +25,7 @@ ui <- dashboardPage(
             ),
             
             column(width = 4,
-                   box(title = "Brasil - testes de covid-19", width = NULL, solidHeader = TRUE, status = "success",
+                   box(title = "Brasil - testes de covid-19", id = "covid-testes-br", width = NULL, solidHeader = TRUE, status = "success",
                        tags$b(testes_total), "testes realizados", " | ",  tags$b(testes_por_milhao), "testes por milhão de habitantes"),
                    box(title = "Casos confirmados por região", width = NULL, withLoader(plotlyOutput("casos_regiao"), type = "html", loader = "loader6"))
             )
@@ -34,9 +34,10 @@ ui <- dashboardPage(
 
         fluidRow(
 
-            box(title = "Acumulado", width = 12, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
+            box(title = "Acumulado - confirmados, recuperados e óbitos", width = 12, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
                 tags$li("Casos confirmados", style = "color: blue; font-size: 12px; margin-left: 15px;"),
-                tags$li("Mortes", style = "color: red; font-size: 12px; margin-left: 15px;"))
+                tags$li("Recuperados", style = "color: green; font-size: 12px; margin-left: 15px;"),
+                tags$li("Óbitos", style = "color: red; font-size: 12px; margin-left: 15px;"))
 
         ),
         
@@ -50,7 +51,7 @@ ui <- dashboardPage(
         ),
 
         fluidRow(
-            p("Desenvolvido por Herbert Souza", style = "font-size: 14px; text-align: center;")
+            p("Desenvolvido por Herbert Souza", style = "font-size: 12px; text-align: center;")
         )
         
     )
