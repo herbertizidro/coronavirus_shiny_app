@@ -58,7 +58,7 @@ shinyServer(function(input, output, session) {
             paste("covid19-UFs", Sys.Date(), ".csv", sep="")
         },
         content = function(file) {
-            write.csv(corona_brazil[, c(1:4)], file)
+            write.csv(corona_brazil[, c(1:5)], file)
         }
     )
     
