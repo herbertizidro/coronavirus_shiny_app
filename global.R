@@ -50,10 +50,12 @@ names(corona_brazil)[5] = "recuperados"
 
 corona_brazil[is.na(corona_brazil)] = 0
 total_confirmados = sum(corona_brazil$casos)
+total_recuperados = sum(corona_brazil$recuperados)
 total_obitos = sum(corona_brazil$mortes)
 taxa_letalidade = (total_obitos * 100) / total_confirmados
 
 total_confirmados = accounting(total_confirmados, format="d")
+total_recuperados = accounting(total_recuperados, format="d")
 total_obitos = accounting(total_obitos, format="d")
 taxa_letalidade = paste0(format(taxa_letalidade, digits=2, decimal.mark=","), "%")
 
@@ -152,4 +154,4 @@ names(NOTICIAS)[1] = "<span class='fontes-noticias'>Fontes: BBC Brasil, O Globo 
 
 #limpar memória
 rm(list = subset(ls(), !(ls() %in% c("corona_brazil", "covid_total_dia", "covid_novos_dia", "df_aux", "evolucao_json", "mapa_corona",
-                                     "NOTICIAS", "taxa_letalidade", "testes_por_milhao", "testes_total", "total_confirmados", "total_obitos"))))
+                                     "NOTICIAS", "taxa_letalidade", "testes_por_milhao", "testes_total", "total_confirmados", "total_recuperados", "total_obitos"))))
