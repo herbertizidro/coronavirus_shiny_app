@@ -17,10 +17,10 @@ shinyServer(function(input, output, session) {
         )
     })
     
-    output$letalidade <- renderValueBox({
+    output$recuperados <- renderValueBox({
         valueBox(
-            taxa_letalidade, "Letalidade", icon = icon("percent"),
-            color = "yellow"
+            total_recuperados, "Total de recuperados", icon = icon("chart-line"),
+            color = "green"
         )
     })
     
@@ -74,7 +74,7 @@ shinyServer(function(input, output, session) {
             geom_line(aes(x = data, y = recuperados), color='green') +
             geom_point(aes(x = data, y = recuperados), color='green', size = 1) +
             
-            labs(x = "Dias do mês", y = "Confirmados, óbitos e recuperados") +
+            labs(x = "Dias do mês", y = "Confirmados, recuperados e óbitos") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
             ggtitle("") +
             theme_minimal()
