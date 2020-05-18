@@ -36,7 +36,7 @@ ui <- dashboardPage(
 
             box(title = "Acumulado - confirmados, recuperados e óbitos", width = 12, withLoader(plotlyOutput("acumulado"), type = "html", loader = "loader6"),
                 tags$li("Casos confirmados", style = "color: blue; font-size: 12px; margin-left: 15px;"),
-                tags$li("Recuperados", style = "color: green; font-size: 12px; margin-left: 15px;"),
+                tags$li("Recuperados", style = "color: #00FF00; font-size: 12px; margin-left: 15px;"),
                 tags$li("Óbitos", style = "color: red; font-size: 12px; margin-left: 15px;"))
 
         ),
