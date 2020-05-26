@@ -71,8 +71,8 @@ shinyServer(function(input, output, session) {
             geom_line(aes(x = data, y = casos), color='blue') +
             geom_point(aes(x = data, y = casos), color='blue', size = 1) +
             
-            geom_line(aes(x = data, y = recuperados), color='green') +
-            geom_point(aes(x = data, y = recuperados), color='green', size = 1) +
+            geom_line(aes(x = data, y = recuperados), color='#008000') +
+            geom_point(aes(x = data, y = recuperados), color='#008000', size = 1) +
             
             labs(x = "Dias do mês", y = "Confirmados, recuperados e óbitos") +
             scale_x_date(date_labels = '%d/%m', breaks = "months") +
