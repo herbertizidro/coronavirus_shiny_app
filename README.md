@@ -8,7 +8,7 @@
 
 <img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/screenshot.png">
 
-Fontes:
+Fonte:
 
  - https://labs.wesleycota.com/sarscov2/br/
- - https://www.worldometers.info/coronavirus/
+
