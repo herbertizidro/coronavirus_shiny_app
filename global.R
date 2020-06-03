@@ -105,17 +105,10 @@ covid_novos_dia = cbind(nvs_mortes_aux, nvs_casos_aux)
 
 
 #total de testes pra covid19 feitos no Brasil
-worldometers = read_html("https://www.worldometers.info/coronavirus/")
-tabela = worldometers %>% html_nodes("tr") %>% html_text()
-testes_por_milhao = "---"
-testes_total = "---"
-for (i in tabela) {
-  if(grepl("Brazil", i)){
-    tabela = c(str_split(i, "\\n")[[1]][12], str_split(i, "\\n")[[1]][13])
-    testes_total = tabela[1]
-    testes_por_milhao = tabela[2]
-  }
-}
+testes_br = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-total.csv")
+testes_br = subset(testes_br, state == "TOTAL") #só essa linha interessa
+testes_br = accounting(testes_br$tests, format='d')
+
 
 # notícias sobre o corona - BBC
 noticias_bbc = read_html("https://www.bbc.com/portuguese/search?q=coronav%C3%ADrus")
@@ -154,4 +147,4 @@ names(NOTICIAS)[1] = "<span class='fontes-noticias'>Fontes: BBC Brasil, O Globo 
 
 #limpar memória
 rm(list = subset(ls(), !(ls() %in% c("corona_brazil", "covid_total_dia", "covid_novos_dia", "df_aux", "evolucao_json", "mapa_corona",
-                                     "NOTICIAS", "taxa_letalidade", "testes_por_milhao", "testes_total", "total_confirmados", "total_recuperados", "total_obitos"))))
+                                     "NOTICIAS", "taxa_letalidade", "testes_br", "total_confirmados", "total_recuperados", "total_obitos"))))
