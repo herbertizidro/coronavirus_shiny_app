@@ -26,7 +26,7 @@ ui = dashboardPage(
             
             column(width = 4,
                    box(title = "Brasil - testes de covid-19", id = "covid-testes-br", width = NULL, solidHeader = TRUE, status = "success",
-                       tags$b(testes_total), "testes realizados", " | ",  tags$b(testes_por_milhao), "testes por milhão de habitantes"),
+                       tags$b(testes_br), "testes realizados. Obs: o somatório pode estar desatualizado, por falta de divulgação pelas secretarias de saúde."),
                    box(title = "Casos confirmados por região", width = NULL, withLoader(plotlyOutput("casos_regiao"), type = "html", loader = "loader6"))
             )
             
