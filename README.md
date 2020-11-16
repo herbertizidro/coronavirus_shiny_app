@@ -4,6 +4,8 @@
  
  Acesse em: https://herbertsouza.shinyapps.io/coronavirusBR/
 
+Obs: essa aplicação não está mais tendo seu código atualizado.
+
 <img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/screenshot01.10.2020.png">
 
 Fonte:
