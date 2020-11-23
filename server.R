@@ -32,11 +32,11 @@ shinyServer(function(input, output, session) {
         legenda = paste0("<strong>Estado: </strong>", 
                          mapa_corona$estado, 
                          "<br><strong>Confirmados: </strong>", 
-                         mapa_corona$casos,
+                         casos_mapa,
                          "<br><strong>Recuperados: </strong>", 
-                         mapa_corona$recuperados,
+                         recuperados_mapa,
                          "<br><strong>Mortes: </strong>",
-                         mapa_corona$mortes)
+                         mortes_mapa)
         
         mapa = leaflet(mapa_corona, options = leafletOptions(zoomControl = TRUE, minZoom = 4, maxZoom = 4.5, dragging = TRUE)) %>%
             addPolygons(fillColor = ~cores_mapa(as.numeric(mapa_corona$mortes)), 
