@@ -7,6 +7,7 @@
 Obs: temporariamente sem a textura do plano de fundo do mapa, a url http://tile.stamen.com/terrain-background... está fora do ar.
 
 Obs²: os números de confirmados, mortes e recuperados do mapa estavam sem vírgula, foi corrigido.
+<img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/atualizacao_numeros_mapa.PNG">
 
 <img src="https://github.com/herbertizidro/coronavirus_shiny_app/blob/master/screenshot01.10.2020.png">
 
