@@ -1,3 +1,8 @@
+#instala e carrega automaticamente as dependências
+#if("pacman" %in% rownames(installed.packages()) == FALSE) {install.packages("pacman")}
+#pacman::p_load(DT, curl, Rcpp, xlsx, dplyr, rvest, shiny, rgdal, plotly, ggplot2, stringr, leaflet, jsonlite, devtools, lubridate, fuzzyjoin, shinythemes, formattable,
+#              RColorBrewer, shinydashboard, leaflet.extras, shinycustomloader)
+
 library(DT)
 library(curl)
 library(Rcpp)
