@@ -1,16 +1,17 @@
 #instala e carrega automaticamente as dependências
-#if("pacman" %in% rownames(installed.packages()) == FALSE) {install.packages("pacman")}
-#pacman::p_load(DT, curl, Rcpp, xlsx, dplyr, rvest, shiny, rgdal, plotly, ggplot2, stringr, leaflet, jsonlite, devtools, lubridate, fuzzyjoin, shinythemes, formattable,
-#              RColorBrewer, shinydashboard, leaflet.extras, shinycustomloader)
+# if("pacman" %in% rownames(installed.packages()) == FALSE) {install.packages("pacman")}
+# pacman::p_load(DT, curl, Rcpp, xlsx, dplyr, rvest, shiny, rgdal, plotly, ggplot2, stringr, leaflet, jsonlite, devtools, lubridate, fuzzyjoin, shinythemes, formattable,
+#               RColorBrewer, shinydashboard, leaflet.extras, shinycustomloader)
 
 library(DT)
 library(curl)
 library(Rcpp)
-library(xlsx)
+#library(xlsx)
 library(dplyr)
 library(rvest)
 library(shiny)
 library(rgdal)
+library(readxl)
 library(plotly)
 library(ggplot2)
 library(stringr)
@@ -37,7 +38,7 @@ names(lat_long_UFs)[1] = "uid"
 names(lat_long_UFs)[2] = "lat"
 names(lat_long_UFs)[3] = "long"
 
-estados_uid = read.xlsx("estados_uid_template.xlsx", 1, encoding="UTF-8")
+estados_uid = read_excel("estados_uid_template.xlsx")
 
 #fonte de dados covid19
 covid_csv = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-total.csv")
@@ -54,6 +55,10 @@ names(corona_brazil)[4] = "mortes"
 names(corona_brazil)[5] = "recuperados"
 
 corona_brazil[is.na(corona_brazil)] = 0
+
+corona_brazil_obitos_freq = 100 * prop.table(corona_brazil$mortes)
+corona_brazil = cbind(corona_brazil, obitos_perc = round(corona_brazil_obitos_freq, digits = 1))
+
 total_confirmados = sum(corona_brazil$casos)
 total_recuperados = sum(corona_brazil$recuperados)
 total_obitos = sum(corona_brazil$mortes)
@@ -77,6 +82,8 @@ mortes_mapa = accounting(mapa_corona$mortes, format="d")
 df_aux = as.data.frame(cbind(mapa_corona$NM_REGIAO, mapa_corona$casos))
 names(df_aux)[1] = "Região"
 names(df_aux)[2] = "Total de casos confirmados"
+
+mapa_corona$obitos_perc = paste0(format(mapa_corona$obitos_perc, digits=2, decimal.mark=","), "%")
 
 #avanço dos casos(acumulado)
 covid_total_dia = read.csv("https://raw.githubusercontent.com/wcota/covid19br/master/cases-brazil-states.csv")
@@ -120,16 +127,16 @@ testes_br = subset(testes_br, state == "TOTAL") #só essa linha interessa
 testes_br = accounting(testes_br$tests, format='d')
 
 
-# notícias sobre o corona - BBC
-noticias_bbc = read_html("https://www.bbc.com/portuguese/search?q=coronav%C3%ADrus")
-bbc_principais_titulo = noticias_bbc %>% html_nodes(".hard-news-unit__headline-link") %>% html_text()
-bbc_principais_link = noticias_bbc %>% html_nodes(".hard-news-unit__headline a") %>% html_attr("href")
-bbc_principais_hora = noticias_bbc %>% html_nodes(".date") %>% html_text()
-for (i in 1:length(bbc_principais_link)) {
-  bbc_principais_link[i] = paste0("<a href='", bbc_principais_link[i], "'>Acessar Notícia</a>")
-}
-BBC = paste(bbc_principais_titulo, "  |  ", bbc_principais_hora,
-            "  |  ", bbc_principais_link, sep="")
+# # notícias sobre o corona - BBC
+# noticias_bbc = read_html("https://www.bbc.com/portuguese/search?q=coronav%C3%ADrus")
+# bbc_principais_titulo = noticias_bbc %>% html_nodes(".hard-news-unit__headline-link") %>% html_text()
+# bbc_principais_link = noticias_bbc %>% html_nodes(".hard-news-unit__headline a") %>% html_attr("href")
+# bbc_principais_hora = noticias_bbc %>% html_nodes(".date") %>% html_text()
+# for (i in 1:length(bbc_principais_link)) {
+#   bbc_principais_link[i] = paste0("<a href='", bbc_principais_link[i], "'>Acessar Notícia</a>")
+# }
+# BBC = paste(bbc_principais_titulo, "  |  ", bbc_principais_hora,
+#             "  |  ", bbc_principais_link, sep="")
 
 # notícias sobre o corona - O Globo
 noticias_oglobo = read_html("https://oglobo.globo.com/sociedade/coronavirus/")
@@ -152,7 +159,7 @@ UOL = paste(uol_principais_titulo, "  |  ", uol_principais_hora,
             "  |  ", uol_principais_link, sep="")
 
 NOTICIAS = c()
-NOTICIAS = as.data.frame(c(NOTICIAS, BBC, OGLOBO, UOL))
+NOTICIAS = as.data.frame(c(NOTICIAS, OGLOBO, UOL))
 names(NOTICIAS)[1] = "<span class='fontes-noticias'>Fontes: BBC Brasil, O Globo e UOL</div>"
 
 #limpar memória
