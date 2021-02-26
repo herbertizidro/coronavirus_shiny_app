@@ -30,13 +30,13 @@ shinyServer(function(input, output, session) {
                                    domain = unique(as.numeric(mapa_corona$mortes)), n=5)
         
         legenda = paste0("<strong>Estado: </strong>", 
-                         mapa_corona$estado, 
+                         mapa_corona$estado,
+                         "<br><strong>Mortes: </strong>",
+                         mortes_mapa,
                          "<br><strong>Confirmados: </strong>", 
                          casos_mapa,
                          "<br><strong>Recuperados: </strong>", 
-                         recuperados_mapa,
-                         "<br><strong>Mortes: </strong>",
-                         mortes_mapa)
+                         recuperados_mapa)
         
         mapa = leaflet(mapa_corona, options = leafletOptions(zoomControl = TRUE, minZoom = 4, maxZoom = 4.5, dragging = TRUE)) %>%
             addPolygons(fillColor = ~cores_mapa(as.numeric(mapa_corona$mortes)), 
@@ -45,7 +45,7 @@ shinyServer(function(input, output, session) {
                         weight = 1, 
                         popup = legenda) %>%
             addTiles("http://tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg") %>% 
-            addLabelOnlyMarkers(~long, ~lat, label =  ~mortes, 
+            addLabelOnlyMarkers(~long, ~lat, label =  ~obitos_perc, 
                                 labelOptions = labelOptions(noHide = T, direction = 'center', textOnly = T,
                                                             style = list("font-size" = "13px"))) %>% suspendScroll()
         
@@ -118,3 +118,4 @@ shinyServer(function(input, output, session) {
     output$noticias_br =  renderDataTable({NOTICIAS}, escape = FALSE)
     
 })
+
