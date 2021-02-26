@@ -19,7 +19,7 @@ ui = dashboardPage(
             
             column(width = 8,
                    
-                   box(title = paste0("Brasil - óbitos por uf ", "| Letalidade: ", taxa_letalidade), width = NULL,
+                   box(title = paste0("Brasil - % de óbitos por uf ", "| Letalidade: ", taxa_letalidade), width = NULL,
                        withLoader(leafletOutput("mapa_br"), type = "html", loader = "loader6"),
                        tags$i(paste("Fonte: Ministério da Saúde e secretarias de saúde de cada estado -"), downloadLink("dados_corona", "Download CSV"), style = "font-size: 12px;")),
             ),
@@ -56,3 +56,4 @@ ui = dashboardPage(
         
     )
 )
+
